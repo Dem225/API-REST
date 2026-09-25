@@ -1,9 +1,11 @@
 from jose import jwt, JWTError
+
 from datetime import datetime, timezone, timedelta
+
 
 TIME_ACCESS = 5
 
-SECRET_KEY = "azzertyuiopqsdfghjklmwxcvbn,;dfghjkl"
+SECRET_KEY = "une-vraie-cle-secrete"
 ALGORITHM = "HS256"
 
 
@@ -11,9 +13,13 @@ def create_token(data: dict):
 
     to_encode = data.copy()
 
-    expire = datetime.now(timezone.utc) + timedelta(minutes=TIME_ACCESS)
+    expire = datetime.now(timezone.utc) + timedelta(
+        minutes=TIME_ACCESS
+    )
 
-    to_encode.update({"exp": expire})
+    to_encode.update({
+        "exp": expire
+    })
 
     return jwt.encode(
         to_encode,
@@ -25,6 +31,7 @@ def create_token(data: dict):
 def decode_token(token: str):
 
     try:
+
         payload = jwt.decode(
             token,
             SECRET_KEY,
@@ -33,5 +40,8 @@ def decode_token(token: str):
 
         return payload
 
-    except JWTError:
+    except JWTError as e:
+
+        print("ERREUR JWT :", e)
+
         return None

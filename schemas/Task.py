@@ -1,7 +1,7 @@
 from pydantic import BaseModel, Field
 
 
-class CreateTask(BaseModel):
+class CreateTaskValide(BaseModel):
 
     title: str = Field()
 
@@ -12,5 +12,3 @@ class CreateTask(BaseModel):
     completed: bool = Field(
         default=False
     )
-
-    userId: int = Field()

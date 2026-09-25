@@ -1,9 +1,11 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
 
 from schemas.auth import Conexions, UserCreate
 from services.auth import AuthService
-from db.database import db_dependency , Base , engine
-import model
+from typing import Annotated
+from db.database import db_dependency
+from fastapi.security import OAuth2PasswordRequestForm
+
 
 auth_router = APIRouter(
     prefix="/auth",
@@ -22,7 +24,8 @@ async def Inscriptions(body: UserCreate,db: db_dependency):
 
 
 @auth_router.post("/connexion")
-async def Connexion( body: Conexions,db: db_dependency):
+async def Connexion(form_data: Annotated[OAuth2PasswordRequestForm, Depends()], db: db_dependency):
     service = AuthService(db)
+    body = Conexions(email=form_data.username, password=form_data.password)
 
-    return await service.connexion(body)
+    return await service.connexion(body) 

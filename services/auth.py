@@ -55,9 +55,9 @@ class AuthService:
         result = await self.db.execute(
             select(User).where(User.email == user.email)
         )
-
+       
         User_db = result.scalar_one_or_none()
-
+        print(User_db)
         # Vérifier l'utilisateur et le mot de passe
         if not User_db or not pwd_context.verify(
             user.password,
