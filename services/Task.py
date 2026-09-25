@@ -35,7 +35,8 @@ class TaskService :
 
         result = await self.db.execute(
             select(CreateTask).where(
-                CreateTask.userId == user_id
+                CreateTask.userId ==user_id
+                
             )
         )
 
