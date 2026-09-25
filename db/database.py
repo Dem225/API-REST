@@ -16,7 +16,6 @@ engine = create_async_engine(URL)
 
 
 #DEF OF SESSION
-# SessionLocal= sessionmaker(autoflush=False , autocommit=False , bind=engine)
 
 async_session = async_sessionmaker(engine, expire_on_commit=False)
 
