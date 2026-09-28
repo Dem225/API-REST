@@ -8,7 +8,7 @@ from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession, async_sess
 import os
 from dotenv import load_dotenv
 load_dotenv()
-URL=os.getenv("SQLALCHEMY_DATABASE_URL_URI")
+URL=os.getenv("SQLALCHEMY_DATABASE_URL")
 
 # DEF ENGINE
 
