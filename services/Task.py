@@ -39,8 +39,13 @@ class TaskService :
                 
             )
         )
-
-        return result.scalars().all()
+        task= result.scalars().all()
+        if not task:
+            raise HTTPException(
+                status_code=404,
+                detail="Pas de tache disponible !"
+            )
+        return task
 
     
     async def get_one_task(self, user_Id: int , task_id : int):
