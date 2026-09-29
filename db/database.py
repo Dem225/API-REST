@@ -12,7 +12,7 @@ URL=os.getenv("SQLALCHEMY_DATABASE_URL")
 
 # DEF ENGINE
 
-engine = create_async_engine(URL)
+engine = create_async_engine(URL , connect_args={"ssl": True})
 
 
 #DEF OF SESSION
