@@ -16,7 +16,7 @@ dependencies = [
     "jose>=1.0.0",
     "loguru>=0.7.3",
     "passlib>=1.7.4",
-    "psycopg2>=2.9.13",
+    "psycopg2-binary",
     "pyjwt>=2.14.0",
     "python-jose[cryptography]>=3.5.0",
     "requests>=2.34.2",
