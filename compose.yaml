@@ -1,0 +1,10 @@
+# docker run -d \
+#   --name database \
+#   --network app-network \
+#   postgres:17-alpine
+
+
+# docker run -d \
+#   --name api \
+#   --network app-network \
+#   docker-demo
