@@ -7,12 +7,26 @@ from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession, async_sess
 
 import os
 from dotenv import load_dotenv
+from sqlalchemy.engine import make_url
 load_dotenv()
 URL=os.getenv("SQLALCHEMY_DATABASE_URL")
+if not URL:
+    raise RuntimeError(
+        "SQLALCHEMY_DATABASE_URL n'est pas défini : ajoute-le dans ton fichier .env "
+        "(voir .env.example)."
+    )
+
+# Neon fournit souvent une URL "postgresql://...?sslmode=require&channel_binding=require".
+# Le moteur est asynchrone : on force le driver asyncpg et on normalise les paramètres SSL.
+_db_url = make_url(URL).set(drivername="postgresql+asyncpg")
+_query = dict(_db_url.query)
+_query.pop("sslmode", None)
+_query.pop("channel_binding", None)
+_query["ssl"] = "require"
 
 # DEF ENGINE
 
-engine = create_async_engine(URL , connect_args={"ssl": True})
+engine = create_async_engine(_db_url.set(query=_query))
 
 
 #DEF OF SESSION
