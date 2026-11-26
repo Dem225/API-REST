@@ -1,3 +1,5 @@
+import os
+
 from jose import jwt, JWTError
 
 from datetime import datetime, timezone, timedelta
@@ -5,7 +7,12 @@ from datetime import datetime, timezone, timedelta
 
 TIME_ACCESS = 5
 
-SECRET_KEY = "REMOVED-JWT-SECRET"
+SECRET_KEY = os.getenv("JWT_SECRET_KEY")
+if not SECRET_KEY:
+    raise RuntimeError(
+        "JWT_SECRET_KEY n'est pas défini : ajoute-le dans ton fichier .env "
+        "(voir .env.example)."
+    )
 ALGORITHM = "HS256"
 
 

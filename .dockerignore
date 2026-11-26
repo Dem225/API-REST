@@ -1,0 +1,15 @@
+.git
+.gitignore
+.env
+.env*
+.venv
+__pycache__/
+*.py[oc]
+*.db
+*.sqlite*
+*.sql
+*.dump
+*.sql.gz
+README.md
+exercices/
+texte.tx

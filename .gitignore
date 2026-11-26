@@ -8,3 +8,19 @@ wheels/
 
 # Virtual environments
 .venv
+
+# Secrets et configuration locale (ne jamais committer)
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets/
+
+# Bases de données et dumps
+*.db
+*.sqlite
+*.sqlite3
+*.sql
+*.dump
+*.sql.gz
