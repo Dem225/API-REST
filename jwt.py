@@ -11,6 +11,8 @@ TIME_ACCESS = 5
 load_dotenv()
 
 SECRET_KEY = os.getenv("JWT_SECRET_KEY")
+if SECRET_KEY:
+    SECRET_KEY = SECRET_KEY.strip().strip('"').strip("'")
 if not SECRET_KEY:
     raise RuntimeError(
         "JWT_SECRET_KEY n'est pas défini : ajoute-le dans ton fichier .env "

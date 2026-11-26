@@ -10,6 +10,8 @@ from dotenv import load_dotenv
 from sqlalchemy.engine import make_url
 load_dotenv()
 URL=os.getenv("SQLALCHEMY_DATABASE_URL")
+if URL:
+    URL = URL.strip().strip('"').strip("'")
 if not URL:
     raise RuntimeError(
         "SQLALCHEMY_DATABASE_URL n'est pas défini : ajoute-le dans ton fichier .env "
