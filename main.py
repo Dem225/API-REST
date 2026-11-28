@@ -2,10 +2,21 @@ from fastapi import FastAPI
 from loguru import logger
 from routes.auth import auth_router
 from routes.Task import Task_route
-from db.database import init_db
+from db.database import engine, init_db
+from jwt import SECRET_KEY
 from model.user import User
 from model.task import CreateTask
 app = FastAPI()
+
+
+@app.get("/health")
+async def health():
+    """Endpoint de diagnostic : indique si la configuration est présente."""
+    return {
+        "status": "ok",
+        "database_configured": engine is not None,
+        "jwt_configured": bool(SECRET_KEY),
+    }
 
 @app.on_event("startup")
 async def on_startup():
